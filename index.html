@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f7fb">
+  <meta name="color-scheme" content="light dark">
+  <title>Info Terminal</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">INFO TERMINAL</p>
+        <h1>Dashboard</h1>
+      </div>
+      <div class="topbar-actions">
+        <div class="status-copy">
+          <span id="connectionDot" class="status-dot" aria-hidden="true"></span>
+          <span id="statusText">Not configured</span>
+          <span id="updatedText"></span>
+        </div>
+        <button id="refreshButton" class="icon-button" type="button" aria-label="Refresh dashboard">↻</button>
+        <button id="settingsButton" class="button secondary" type="button">Settings</button>
+      </div>
+    </header>
+
+    <main id="dashboard" class="dashboard" aria-live="polite">
+      <section id="busCard" class="module-card bus-card hidden">
+        <div class="module-heading">
+          <div>
+            <p class="module-kicker">BUS ETA</p>
+            <h2>Next buses</h2>
+          </div>
+          <div id="busTabs" class="segmented" role="tablist"></div>
+        </div>
+        <div id="busContent" class="module-content"></div>
+      </section>
+
+      <section id="weatherCard" class="module-card weather-card hidden">
+        <div class="module-heading">
+          <div>
+            <p class="module-kicker">WEATHER</p>
+            <h2 id="weatherLocation">Hong Kong</h2>
+          </div>
+          <div id="weatherUpdated" class="module-meta"></div>
+        </div>
+        <div id="weatherContent" class="module-content"></div>
+      </section>
+
+      <section id="calendarCard" class="module-card calendar-card hidden">
+        <div class="module-heading">
+          <div>
+            <p class="module-kicker">CALENDAR</p>
+            <h2>Today & next</h2>
+          </div>
+          <div id="calendarSummary" class="module-meta"></div>
+        </div>
+        <div id="calendarContent" class="module-content"></div>
+      </section>
+
+      <section id="welcomeCard" class="welcome-card">
+        <p class="module-kicker">FIRST RUN</p>
+        <h2>Connect your Information Core</h2>
+        <p>This dashboard runs entirely in your browser. Your backend token and private calendar feed URLs are stored only in this browser and are never committed to the repository.</p>
+        <button id="welcomeSetupButton" class="button primary" type="button">Configure dashboard</button>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="settingsDialog" class="settings-dialog">
+    <form id="settingsForm" method="dialog">
+      <div class="dialog-heading">
+        <div>
+          <p class="eyebrow">LOCAL SETTINGS</p>
+          <h2>Dashboard configuration</h2>
+        </div>
+        <button id="closeSettingsButton" class="icon-button" type="button" aria-label="Close settings">×</button>
+      </div>
+
+      <div class="settings-grid">
+        <section class="settings-section">
+          <h3>Backend</h3>
+          <label>Server URL
+            <input id="serverUrlInput" type="url" placeholder="https://your-service.run.app" autocomplete="off">
+          </label>
+          <label>Token
+            <input id="tokenInput" type="password" autocomplete="off">
+          </label>
+          <div class="inline-fields">
+            <label>Device ID
+              <input id="deviceIdInput" type="text" value="web-dashboard" autocomplete="off">
+            </label>
+            <label>Language
+              <select id="languageInput">
+                <option value="en">English</option>
+                <option value="zh-HK">繁體中文</option>
+              </select>
+            </label>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <div class="section-title-row">
+            <h3>Bus ETA</h3>
+            <label class="toggle"><input id="busEnabledInput" type="checkbox" checked><span>Enabled</span></label>
+          </div>
+          <p class="help">One group becomes one tab. Routes use the same operator / route / stop / direction configuration as Android.</p>
+          <label>Bus groups (JSON)
+            <textarea id="busGroupsInput" rows="11" spellcheck="false"></textarea>
+          </label>
+        </section>
+
+        <section class="settings-section">
+          <div class="section-title-row">
+            <h3>Weather</h3>
+            <label class="toggle"><input id="weatherEnabledInput" type="checkbox" checked><span>Enabled</span></label>
+          </div>
+          <label>Temperature station
+            <input id="temperatureLocationInput" type="text" list="temperatureLocations" placeholder="hong-kong-observatory" autocomplete="off">
+          </label>
+          <datalist id="temperatureLocations">
+            <option value="hong-kong-observatory">Hong Kong Observatory</option>
+            <option value="kings-park">King's Park</option>
+            <option value="sha-tin">Sha Tin</option>
+            <option value="tai-po">Tai Po</option>
+            <option value="tuen-mun">Tuen Mun</option>
+            <option value="tseung-kwan-o">Tseung Kwan O</option>
+            <option value="kwun-tong">Kwun Tong</option>
+            <option value="sham-shui-po">Sham Shui Po</option>
+            <option value="wong-tai-sin">Wong Tai Sin</option>
+            <option value="hong-kong-park">Hong Kong Park</option>
+            <option value="happy-valley">Happy Valley</option>
+            <option value="yuen-long-park">Yuen Long Park</option>
+          </datalist>
+          <label>Rainfall district
+            <input id="rainfallLocationInput" type="text" list="rainfallLocations" placeholder="central-and-western" autocomplete="off">
+          </label>
+          <datalist id="rainfallLocations">
+            <option value="central-and-western">Central & Western</option>
+            <option value="wan-chai">Wan Chai</option>
+            <option value="eastern">Eastern</option>
+            <option value="southern">Southern</option>
+            <option value="yau-tsim-mong">Yau Tsim Mong</option>
+            <option value="sham-shui-po">Sham Shui Po</option>
+            <option value="kowloon-city">Kowloon City</option>
+            <option value="wong-tai-sin">Wong Tai Sin</option>
+            <option value="kwun-tong">Kwun Tong</option>
+            <option value="sha-tin">Sha Tin</option>
+            <option value="tai-po">Tai Po</option>
+            <option value="sai-kung">Sai Kung</option>
+            <option value="tsuen-wan">Tsuen Wan</option>
+            <option value="tuen-mun">Tuen Mun</option>
+            <option value="yuen-long">Yuen Long</option>
+          </datalist>
+        </section>
+
+        <section class="settings-section">
+          <div class="section-title-row">
+            <h3>Calendar</h3>
+            <label class="toggle"><input id="calendarEnabledInput" type="checkbox" checked><span>Enabled</span></label>
+          </div>
+          <p class="help">Feed URLs are sent in X-Calendar-ICal-* headers, not query strings.</p>
+          <label>Calendar feeds (JSON)
+            <textarea id="calendarFeedsInput" rows="7" spellcheck="false"></textarea>
+          </label>
+          <div class="inline-fields">
+            <label>Alert lead (min)
+              <input id="alertLeadInput" type="number" min="0" max="180" value="30">
+            </label>
+            <label>Focus window (min)
+              <input id="focusMinInput" type="number" min="1" max="120" value="10">
+            </label>
+          </div>
+        </section>
+      </div>
+
+      <p id="settingsError" class="error-text" role="alert"></p>
+      <div class="dialog-actions">
+        <button id="clearSettingsButton" class="button danger" type="button">Clear local settings</button>
+        <span class="dialog-spacer"></span>
+        <button id="cancelSettingsButton" class="button secondary" type="button">Cancel</button>
+        <button class="button primary" type="submit">Save & refresh</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
