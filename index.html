@@ -12,16 +12,9 @@
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <div>
-        <p class="eyebrow">INFO TERMINAL</p>
-        <h1>Dashboard</h1>
-      </div>
+      <div><p class="eyebrow">INFO TERMINAL</p><h1>Dashboard</h1></div>
       <div class="topbar-actions">
-        <div class="status-copy">
-          <span id="connectionDot" class="status-dot" aria-hidden="true"></span>
-          <span id="statusText">Not configured</span>
-          <span id="updatedText"></span>
-        </div>
+        <div class="status-copy"><span id="connectionDot" class="status-dot" aria-hidden="true"></span><span id="statusText">Not configured</span><span id="updatedText"></span></div>
         <button id="refreshButton" class="icon-button" type="button" aria-label="Refresh dashboard">↻</button>
         <button id="settingsButton" class="button secondary" type="button">Settings</button>
       </div>
@@ -30,29 +23,14 @@
     <main id="dashboard" class="dashboard" aria-live="polite">
       <section id="busLookupCard" class="module-card lookup-card hidden">
         <div class="module-heading lookup-heading">
-          <div>
-            <p class="module-kicker">QUICK BUS LOOKUP</p>
-            <h2>Find any route</h2>
-          </div>
+          <div><p class="module-kicker">QUICK BUS LOOKUP</p><h2>Find any route</h2></div>
           <p class="module-meta">Temporary lookup · does not change your dashboard</p>
         </div>
         <div class="lookup-grid">
-          <label>Operator
-            <select id="lookupOperator">
-              <option value="kmb">KMB / LWB</option>
-              <option value="ctb">Citybus</option>
-            </select>
-          </label>
-          <label class="lookup-route-field">Route
-            <input id="lookupRoute" type="search" placeholder="e.g. 58X" autocomplete="off">
-            <div id="lookupRouteResults" class="lookup-results hidden"></div>
-          </label>
-          <label>Direction
-            <select id="lookupDirection" disabled><option>Select a route first</option></select>
-          </label>
-          <label>Stop
-            <select id="lookupStop" disabled><option>Select a direction first</option></select>
-          </label>
+          <label>Operator<select id="lookupOperator"><option value="kmb">KMB / LWB</option><option value="ctb">Citybus</option></select></label>
+          <label class="lookup-route-field">Route<input id="lookupRoute" type="search" placeholder="e.g. 58X" autocomplete="off"><div id="lookupRouteResults" class="lookup-results hidden"></div></label>
+          <label>Direction<select id="lookupDirection" disabled><option>Select a route first</option></select></label>
+          <label>Stop<select id="lookupStop" disabled><option>Select a direction first</option></select></label>
         </div>
         <div class="lookup-actions">
           <button id="lookupPrevStop" class="button secondary compact-button" type="button" disabled>← Previous stop</button>
@@ -64,141 +42,53 @@
         <div id="lookupEta" class="lookup-eta"><div class="empty-state">Search for a route to check its ETA at any stop.</div></div>
       </section>
 
-      <section id="busCard" class="module-card bus-card hidden">
-        <div class="module-heading">
-          <div>
-            <p class="module-kicker">BUS ETA</p>
-            <h2>Next buses</h2>
-          </div>
-          <div id="busTabs" class="segmented" role="tablist"></div>
-        </div>
-        <div id="busContent" class="module-content"></div>
-      </section>
-
-      <section id="weatherCard" class="module-card weather-card hidden">
-        <div class="module-heading">
-          <div>
-            <p class="module-kicker">WEATHER</p>
-            <h2 id="weatherLocation">Hong Kong</h2>
-          </div>
-          <div id="weatherUpdated" class="module-meta"></div>
-        </div>
-        <div id="weatherContent" class="module-content"></div>
-      </section>
-
-      <section id="calendarCard" class="module-card calendar-card hidden">
-        <div class="module-heading">
-          <div>
-            <p class="module-kicker">CALENDAR</p>
-            <h2>Today & next</h2>
-          </div>
-          <div id="calendarSummary" class="module-meta"></div>
-        </div>
-        <div id="calendarContent" class="module-content"></div>
-      </section>
-
-      <section id="welcomeCard" class="welcome-card">
-        <p class="module-kicker">FIRST RUN</p>
-        <h2>Connect your Information Core</h2>
-        <p>This dashboard runs entirely in your browser. Your backend token and private calendar feed URLs are stored only in this browser and are never committed to the repository.</p>
-        <button id="welcomeSetupButton" class="button primary" type="button">Configure dashboard</button>
-      </section>
+      <section id="busCard" class="module-card bus-card hidden"><div class="module-heading"><div><p class="module-kicker">BUS ETA</p><h2>Next buses</h2></div><div id="busTabs" class="segmented" role="tablist"></div></div><div id="busContent" class="module-content"></div></section>
+      <section id="weatherCard" class="module-card weather-card hidden"><div class="module-heading"><div><p class="module-kicker">WEATHER</p><h2 id="weatherLocation">Hong Kong</h2></div><div id="weatherUpdated" class="module-meta"></div></div><div id="weatherContent" class="module-content"></div></section>
+      <section id="calendarCard" class="module-card calendar-card hidden"><div class="module-heading"><div><p class="module-kicker">CALENDAR</p><h2>Today & next</h2></div><div id="calendarSummary" class="module-meta"></div></div><div id="calendarContent" class="module-content"></div></section>
+      <section id="welcomeCard" class="welcome-card"><p class="module-kicker">FIRST RUN</p><h2>Connect your Information Core</h2><p>This dashboard runs entirely in your browser. Your backend token and private calendar feed URLs are stored only in this browser and are never committed to the repository.</p><button id="welcomeSetupButton" class="button primary" type="button">Configure dashboard</button></section>
     </main>
   </div>
 
   <dialog id="settingsDialog" class="settings-dialog">
     <form id="settingsForm" method="dialog">
-      <div class="dialog-heading">
-        <div>
-          <p class="eyebrow">LOCAL SETTINGS</p>
-          <h2>Dashboard configuration</h2>
-        </div>
-        <button id="closeSettingsButton" class="icon-button" type="button" aria-label="Close settings">×</button>
-      </div>
-
+      <div class="dialog-heading"><div><p class="eyebrow">LOCAL SETTINGS</p><h2>Dashboard configuration</h2></div><button id="closeSettingsButton" class="icon-button" type="button" aria-label="Close settings">×</button></div>
       <div class="settings-grid">
         <section class="settings-section">
           <h3>Backend</h3>
-          <label>Server URL
-            <input id="serverUrlInput" type="url" placeholder="https://your-service.run.app" autocomplete="off">
-          </label>
-          <label>Token
-            <input id="tokenInput" type="password" autocomplete="off">
-          </label>
-          <div class="inline-fields">
-            <label>Device ID
-              <input id="deviceIdInput" type="text" value="web-dashboard" autocomplete="off">
-            </label>
-            <label>Language
-              <select id="languageInput">
-                <option value="en">English</option>
-                <option value="zh-HK">繁體中文</option>
-              </select>
-            </label>
-          </div>
+          <label>Server URL<input id="serverUrlInput" type="url" placeholder="https://your-service.run.app" autocomplete="off"></label>
+          <label>Token<input id="tokenInput" type="password" autocomplete="off"></label>
+          <div class="inline-fields"><label>Device ID<input id="deviceIdInput" type="text" value="web-dashboard" autocomplete="off"></label><label>Language<select id="languageInput"><option value="en">English</option><option value="zh-HK">繁體中文</option></select></label></div>
         </section>
 
         <section class="settings-section settings-section-wide">
-          <div class="section-title-row">
-            <div>
-              <h3>Bus favorites</h3>
-              <p class="help">Choose routes and stops by name. Provider stop IDs stay hidden.</p>
-            </div>
-            <label class="toggle"><input id="busEnabledInput" type="checkbox" checked><span>Enabled</span></label>
-          </div>
+          <div class="section-title-row"><div><h3>Bus favorites</h3><p class="help">Choose routes and stops by name. Provider stop IDs stay hidden.</p></div><label class="toggle"><input id="busEnabledInput" type="checkbox" checked><span>Enabled</span></label></div>
           <div id="busGroupsEditor" class="config-editor"></div>
           <button id="addBusGroupButton" class="button secondary compact-button" type="button">+ Add group</button>
           <textarea id="busGroupsInput" class="config-storage" tabindex="-1" aria-hidden="true"></textarea>
         </section>
 
         <section class="settings-section">
-          <div class="section-title-row">
-            <h3>Weather</h3>
-            <label class="toggle"><input id="weatherEnabledInput" type="checkbox" checked><span>Enabled</span></label>
-          </div>
+          <div class="section-title-row"><h3>Weather</h3><label class="toggle"><input id="weatherEnabledInput" type="checkbox" checked><span>Enabled</span></label></div>
           <p id="weatherCatalogStatus" class="help">Locations are loaded from the backend.</p>
-          <label>Temperature station
-            <select id="temperatureLocationInput"><option value="hong-kong-observatory">Hong Kong Observatory</option></select>
-          </label>
-          <label>Rainfall district
-            <select id="rainfallLocationInput"><option value="central-and-western">Central & Western</option></select>
-          </label>
+          <label>Temperature station<select id="temperatureLocationInput"><option value="hong-kong-observatory">Hong Kong Observatory</option></select></label>
+          <label>Rainfall district<select id="rainfallLocationInput"><option value="central-and-western">Central & Western</option></select></label>
         </section>
 
         <section class="settings-section">
-          <div class="section-title-row">
-            <div>
-              <h3>Calendar</h3>
-              <p class="help">Add one calendar at a time. Private iCal URLs stay in this browser.</p>
-            </div>
-            <label class="toggle"><input id="calendarEnabledInput" type="checkbox" checked><span>Enabled</span></label>
-          </div>
+          <div class="section-title-row"><div><h3>Calendar</h3><p class="help">Add one calendar at a time. Private iCal URLs stay in this browser.</p></div><label class="toggle"><input id="calendarEnabledInput" type="checkbox" checked><span>Enabled</span></label></div>
           <div id="calendarFeedsEditor" class="config-editor"></div>
           <button id="addCalendarButton" class="button secondary compact-button" type="button">+ Add calendar</button>
           <textarea id="calendarFeedsInput" class="config-storage" tabindex="-1" aria-hidden="true"></textarea>
-          <div class="inline-fields">
-            <label>Alert lead (min)
-              <input id="alertLeadInput" type="number" min="0" max="180" value="30">
-            </label>
-            <label>Focus window (min)
-              <input id="focusMinInput" type="number" min="1" max="120" value="10">
-            </label>
-          </div>
+          <div class="inline-fields"><label>Alert lead (min)<input id="alertLeadInput" type="number" min="0" max="180" value="30"></label><label>Focus window (min)<input id="focusMinInput" type="number" min="1" max="120" value="10"></label></div>
         </section>
       </div>
-
       <p id="settingsError" class="error-text" role="alert"></p>
-      <div class="dialog-actions">
-        <button id="clearSettingsButton" class="button danger" type="button">Clear local settings</button>
-        <span class="dialog-spacer"></span>
-        <button id="cancelSettingsButton" class="button secondary" type="button">Cancel</button>
-        <button class="button primary" type="submit">Save & refresh</button>
-      </div>
+      <div class="dialog-actions"><button id="clearSettingsButton" class="button danger" type="button">Clear local settings</button><span class="dialog-spacer"></span><button id="cancelSettingsButton" class="button secondary" type="button">Cancel</button><button class="button primary" type="submit">Save & refresh</button></div>
     </form>
   </dialog>
 
-  <script type="module" src="./app.js"></script>
   <script type="module" src="./settings-ui.js"></script>
+  <script type="module" src="./app.js"></script>
   <script type="module" src="./route-explorer.js"></script>
 </body>
 </html>
