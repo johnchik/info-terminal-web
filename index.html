@@ -7,6 +7,7 @@
   <meta name="color-scheme" content="light dark">
   <title>Info Terminal</title>
   <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./settings-ui.css">
 </head>
 <body>
   <div class="app-shell">
@@ -101,15 +102,17 @@
           </div>
         </section>
 
-        <section class="settings-section">
+        <section class="settings-section settings-section-wide">
           <div class="section-title-row">
-            <h3>Bus ETA</h3>
+            <div>
+              <h3>Bus ETA</h3>
+              <p class="help">Choose the route and stop by name. Stop IDs and service types are handled automatically.</p>
+            </div>
             <label class="toggle"><input id="busEnabledInput" type="checkbox" checked><span>Enabled</span></label>
           </div>
-          <p class="help">One group becomes one tab. Routes use the same operator / route / stop / direction configuration as Android.</p>
-          <label>Bus groups (JSON)
-            <textarea id="busGroupsInput" rows="11" spellcheck="false"></textarea>
-          </label>
+          <div id="busGroupsEditor" class="config-editor"></div>
+          <button id="addBusGroupButton" class="button secondary compact-button" type="button">+ Add bus group</button>
+          <textarea id="busGroupsInput" class="config-storage" tabindex="-1" aria-hidden="true"></textarea>
         </section>
 
         <section class="settings-section">
@@ -117,54 +120,30 @@
             <h3>Weather</h3>
             <label class="toggle"><input id="weatherEnabledInput" type="checkbox" checked><span>Enabled</span></label>
           </div>
+          <p id="weatherCatalogStatus" class="help">Locations are loaded from the backend.</p>
           <label>Temperature station
-            <input id="temperatureLocationInput" type="text" list="temperatureLocations" placeholder="hong-kong-observatory" autocomplete="off">
+            <select id="temperatureLocationInput">
+              <option value="hong-kong-observatory">Hong Kong Observatory</option>
+            </select>
           </label>
-          <datalist id="temperatureLocations">
-            <option value="hong-kong-observatory">Hong Kong Observatory</option>
-            <option value="kings-park">King's Park</option>
-            <option value="sha-tin">Sha Tin</option>
-            <option value="tai-po">Tai Po</option>
-            <option value="tuen-mun">Tuen Mun</option>
-            <option value="tseung-kwan-o">Tseung Kwan O</option>
-            <option value="kwun-tong">Kwun Tong</option>
-            <option value="sham-shui-po">Sham Shui Po</option>
-            <option value="wong-tai-sin">Wong Tai Sin</option>
-            <option value="hong-kong-park">Hong Kong Park</option>
-            <option value="happy-valley">Happy Valley</option>
-            <option value="yuen-long-park">Yuen Long Park</option>
-          </datalist>
           <label>Rainfall district
-            <input id="rainfallLocationInput" type="text" list="rainfallLocations" placeholder="central-and-western" autocomplete="off">
+            <select id="rainfallLocationInput">
+              <option value="central-and-western">Central & Western</option>
+            </select>
           </label>
-          <datalist id="rainfallLocations">
-            <option value="central-and-western">Central & Western</option>
-            <option value="wan-chai">Wan Chai</option>
-            <option value="eastern">Eastern</option>
-            <option value="southern">Southern</option>
-            <option value="yau-tsim-mong">Yau Tsim Mong</option>
-            <option value="sham-shui-po">Sham Shui Po</option>
-            <option value="kowloon-city">Kowloon City</option>
-            <option value="wong-tai-sin">Wong Tai Sin</option>
-            <option value="kwun-tong">Kwun Tong</option>
-            <option value="sha-tin">Sha Tin</option>
-            <option value="tai-po">Tai Po</option>
-            <option value="sai-kung">Sai Kung</option>
-            <option value="tsuen-wan">Tsuen Wan</option>
-            <option value="tuen-mun">Tuen Mun</option>
-            <option value="yuen-long">Yuen Long</option>
-          </datalist>
         </section>
 
         <section class="settings-section">
           <div class="section-title-row">
-            <h3>Calendar</h3>
+            <div>
+              <h3>Calendar</h3>
+              <p class="help">Add one calendar at a time. Private iCal URLs stay in this browser.</p>
+            </div>
             <label class="toggle"><input id="calendarEnabledInput" type="checkbox" checked><span>Enabled</span></label>
           </div>
-          <p class="help">Feed URLs are sent in X-Calendar-ICal-* headers, not query strings.</p>
-          <label>Calendar feeds (JSON)
-            <textarea id="calendarFeedsInput" rows="7" spellcheck="false"></textarea>
-          </label>
+          <div id="calendarFeedsEditor" class="config-editor"></div>
+          <button id="addCalendarButton" class="button secondary compact-button" type="button">+ Add calendar</button>
+          <textarea id="calendarFeedsInput" class="config-storage" tabindex="-1" aria-hidden="true"></textarea>
           <div class="inline-fields">
             <label>Alert lead (min)
               <input id="alertLeadInput" type="number" min="0" max="180" value="30">
@@ -187,5 +166,6 @@
   </dialog>
 
   <script type="module" src="./app.js"></script>
+  <script type="module" src="./settings-ui.js"></script>
 </body>
 </html>
