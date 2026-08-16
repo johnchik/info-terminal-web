@@ -22,4 +22,4 @@ Then open `http://localhost:8000` and configure the backend URL and token in Set
 
 The repository includes a GitHub Actions workflow that deploys the repository root to GitHub Pages.
 
-Expected site URL: `https://johnchik.github.io/info-terminal-web/`
+Site URL: `https://johnchik.github.io/info-terminal-web/`
