@@ -28,6 +28,42 @@
     </header>
 
     <main id="dashboard" class="dashboard" aria-live="polite">
+      <section id="busLookupCard" class="module-card lookup-card hidden">
+        <div class="module-heading lookup-heading">
+          <div>
+            <p class="module-kicker">QUICK BUS LOOKUP</p>
+            <h2>Find any route</h2>
+          </div>
+          <p class="module-meta">Temporary lookup · does not change your dashboard</p>
+        </div>
+        <div class="lookup-grid">
+          <label>Operator
+            <select id="lookupOperator">
+              <option value="kmb">KMB / LWB</option>
+              <option value="ctb">Citybus</option>
+            </select>
+          </label>
+          <label class="lookup-route-field">Route
+            <input id="lookupRoute" type="search" placeholder="e.g. 58X" autocomplete="off">
+            <div id="lookupRouteResults" class="lookup-results hidden"></div>
+          </label>
+          <label>Direction
+            <select id="lookupDirection" disabled><option>Select a route first</option></select>
+          </label>
+          <label>Stop
+            <select id="lookupStop" disabled><option>Select a direction first</option></select>
+          </label>
+        </div>
+        <div class="lookup-actions">
+          <button id="lookupPrevStop" class="button secondary compact-button" type="button" disabled>← Previous stop</button>
+          <button id="lookupNextStop" class="button secondary compact-button" type="button" disabled>Next stop →</button>
+          <span class="dialog-spacer"></span>
+          <select id="lookupSaveGroup" class="compact-select" aria-label="Save to group"></select>
+          <button id="lookupSaveButton" class="button secondary compact-button" type="button" disabled>☆ Save to dashboard</button>
+        </div>
+        <div id="lookupEta" class="lookup-eta"><div class="empty-state">Search for a route to check its ETA at any stop.</div></div>
+      </section>
+
       <section id="busCard" class="module-card bus-card hidden">
         <div class="module-heading">
           <div>
@@ -105,13 +141,13 @@
         <section class="settings-section settings-section-wide">
           <div class="section-title-row">
             <div>
-              <h3>Bus ETA</h3>
-              <p class="help">Choose the route and stop by name. Stop IDs and service types are handled automatically.</p>
+              <h3>Bus favorites</h3>
+              <p class="help">Choose routes and stops by name. Provider stop IDs stay hidden.</p>
             </div>
             <label class="toggle"><input id="busEnabledInput" type="checkbox" checked><span>Enabled</span></label>
           </div>
           <div id="busGroupsEditor" class="config-editor"></div>
-          <button id="addBusGroupButton" class="button secondary compact-button" type="button">+ Add bus group</button>
+          <button id="addBusGroupButton" class="button secondary compact-button" type="button">+ Add group</button>
           <textarea id="busGroupsInput" class="config-storage" tabindex="-1" aria-hidden="true"></textarea>
         </section>
 
@@ -122,14 +158,10 @@
           </div>
           <p id="weatherCatalogStatus" class="help">Locations are loaded from the backend.</p>
           <label>Temperature station
-            <select id="temperatureLocationInput">
-              <option value="hong-kong-observatory">Hong Kong Observatory</option>
-            </select>
+            <select id="temperatureLocationInput"><option value="hong-kong-observatory">Hong Kong Observatory</option></select>
           </label>
           <label>Rainfall district
-            <select id="rainfallLocationInput">
-              <option value="central-and-western">Central & Western</option>
-            </select>
+            <select id="rainfallLocationInput"><option value="central-and-western">Central & Western</option></select>
           </label>
         </section>
 
@@ -167,5 +199,6 @@
 
   <script type="module" src="./app.js"></script>
   <script type="module" src="./settings-ui.js"></script>
+  <script type="module" src="./route-explorer.js"></script>
 </body>
 </html>
